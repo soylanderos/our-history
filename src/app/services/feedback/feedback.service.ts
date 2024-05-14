@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,8 @@ export class FeedbackService {
 
   constructor(
     private toastController: ToastController,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private loadingController: LoadingController
     ) { }
 
   async showToast(message: string) {
@@ -26,5 +28,17 @@ export class FeedbackService {
       buttons: ['OK']
     });
     alert.present();
+  }
+
+  async showLoading(message: string) {
+    const loading = await this.loadingController.create({
+      message
+    });
+    await loading.present();
+    return loading;
+  }
+
+  async dismissLoading() {
+    await this.loadingController.dismiss();
   }
 }

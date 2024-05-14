@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Firestore, addDoc, collection } from '@angular/fire/firestore';
-import { StorageService } from 'src/app/services/storage.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Capacitor } from '@capacitor/core';
+import { FeedbackService } from 'src/app/services/feedback/feedback.service';
 
 @Component({
   selector: 'app-add',
@@ -11,16 +12,31 @@ import { Capacitor } from '@capacitor/core';
 })
 export class AddPage  {
 
+  image: any;
+  selectedCategory: string = '';
   descripcion: string = '';
-  fechaHora: string = '';
+  fechaHora: any;
   ubicacion: string = '';
+  momentCategories: string[] = [
+    'Trips together',
+    'Special dates',
+    'Romantic activities',
+    'Unique moments',
+    'Gifts and surprises',
+    'Relationship milestones',
+    'Fun moments',
+    'Emotional moments',
+    'Adventures',
+    'Special celebrations'
+  ];
 
   constructor(
     private firestore: Firestore,
     private storageService: StorageService,
+    private feedbackService: FeedbackService
   ) {}
 
-  async takePictureAndUpload() {
+  async takePicture() {
     try {
       if (Capacitor.getPlatform() != 'web') await Camera.requestPermissions();
       const image = await Camera.getPhoto({
@@ -29,17 +45,36 @@ export class AddPage  {
         width: 600,
         resultType: CameraResultType.DataUrl
       });
-      const blob = this.dataURLtoBlob(image.dataUrl);
+      this.image = image.dataUrl;
+    } catch(e) {
+      console.log(e);
+    }
+  }
+
+  async agregarMomento() {
+    try {
+      if (!this.image) {
+        console.log('No moment has been taken.');
+        return;
+      }
+      this.feedbackService.showLoading('Adding moment...');
+      const blob = this.dataURLtoBlob(this.image);
       const url = await this.storageService.uploadImage(blob);
       const response = await this.addDocument('our-history', {
         imageUrl: url,
+        selectedCategory: this.selectedCategory,
         descripcion: this.descripcion,
         fechaHora: this.fechaHora,
         ubicacion: this.ubicacion
       });
       console.log(response);
+      this.feedbackService.dismissLoading();
+      this.feedbackService.showToast('Your moment has been successfully added.');
+      //clean inputs
+      this.resetForm();
     } catch(e) {
       console.log(e);
+      this.feedbackService.showToast('Error adding moment.');
     }
   }
 
@@ -52,8 +87,24 @@ export class AddPage  {
     return new Blob([u8arr], {type:mime});
   }
 
-  private addDocument(path: any, data: any) {
+  private async addDocument(path: any, data: any) {
     const dataRef = collection(this.firestore, path);
     return addDoc(dataRef, data);
+  }
+
+  getCurrentDate() {
+   this.fechaHora = new Date().toISOString();
+  }
+
+  openCalendar() {
+    console.log('Abrir calendario');
+  }
+
+  resetForm() {
+    this.image = '';
+    this.selectedCategory = '';
+    this.descripcion = '';
+    this.fechaHora = '';
+    this.ubicacion = '';
   }
 }

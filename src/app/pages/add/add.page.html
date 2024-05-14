@@ -1,43 +1,56 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Agregar Fotos</ion-title>
+    <ion-title>Add Moment</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <ion-card class="form-card">
     <ion-card-header>
-      <ion-card-title class="form-title">Carga de Fotos</ion-card-title>
+      <ion-card-title class="form-title">Create new moment</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-item lines="none">
         <ion-icon name="image" slot="start" class="form-icon"></ion-icon>
-        <ion-label position="stacked" class="form-label">Selecciona una Foto</ion-label>
+        <ion-label position="stacked" class="form-label">Select a photo</ion-label>
         <img *ngIf="image" [src]="image"/>
-        <ion-button expand="block" (click)="takePictureAndUpload()">
-          Tomar una Foto
+        <ion-button expand="block" (click)="takePicture()">
+          Take a photo
         </ion-button>
       </ion-item>
       <ion-item lines="none">
+        <ion-icon name="list" slot="start" class="form-icon"></ion-icon>
+        <ion-label position="stacked" class="form-label">Select a category</ion-label>
+        <ion-select [(ngModel)]="selectedCategory" class="form-input">
+          <ion-select-option *ngFor="let category of momentCategories" [value]="category">{{ category }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item lines="none">
         <ion-icon name="create" slot="start" class="form-icon"></ion-icon>
-        <ion-label position="stacked" class="form-label">Descripción (opcional)</ion-label>
-        <ion-textarea rows="3" class="form-input" [(ngModel)]="descripcion"></ion-textarea>
+        <ion-label position="stacked" class="form-label">Describe what is happening?</ion-label>
+        <ion-textarea rows="3" class="form-input" [(ngModel)]="descripcion" required></ion-textarea>
       </ion-item>
       <ion-item lines="none">
         <ion-icon name="calendar" slot="start" class="form-icon"></ion-icon>
-        <ion-label position="stacked" class="form-label">Fecha y Hora del Momento</ion-label>
-        <ion-datetime display-format="DD/MM/YYYY HH:mm" [(ngModel)]="fechaHora" class="form-input"></ion-datetime>
+        <ion-label position="stacked" class="form-label">Date</ion-label>
+        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime [(ngModel)]="fechaHora" locale="en-US" hourCycle="h12" id="datetime" required></ion-datetime>
+          </ng-template>
+        </ion-modal>
       </ion-item>
       <ion-item lines="none">
         <ion-icon name="location" slot="start" class="form-icon"></ion-icon>
-        <ion-label position="stacked" class="form-label">Ubicación (opcional)</ion-label>
+        <ion-label position="stacked" class="form-label">Where was this moment? (optional)</ion-label>
         <ion-input type="text" class="form-input" [(ngModel)]="ubicacion"></ion-input>
       </ion-item>
     </ion-card-content>
   </ion-card>
 
-  <ion-button expand="block" color="primary" class="form-button" (click)="takePictureAndUpload()">
+  <ion-button expand="block" color="primary" class="form-button" (click)="agregarMomento()" [disabled]="!image || !descripcion || !fechaHora">
     <ion-icon name="add-circle" slot="start"></ion-icon>
-    Agregar Momento
+    Add Moment
   </ion-button>
 </ion-content>
