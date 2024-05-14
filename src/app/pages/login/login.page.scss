@@ -1,0 +1,116 @@
+.content {
+  --background: #4e54c8;  /* fallback for old browsers */
+  background: linear-gradient(180deg, #8C83F7 0, #655BE2 100%);
+  box-shadow: 0 6px 12px #766DE880;
+
+
+  .header {
+       padding: 10vw;
+       margin-top: 7em;
+       color: #fff;
+
+       h3 {
+           font-size: 3.5rem;
+           color: #9d9bef;
+           font-weight: 400;
+           span {
+               color: #fff;
+           }
+       }
+       h1 {
+           font-size: 3.2rem;
+           font-weight: 600;
+       }
+   }
+
+   .login-form {
+       padding: 0 12vw;
+       margin-top: 35px;
+       ion-item {
+           --background: #f8f8f8;
+           --padding-start: 33px;
+           height: 55px;
+           --border-radius: 25px;
+           margin-bottom: 30px;
+           --placeholder-color: #3a3939;
+           --color: #959191;
+           ion-icon {
+               color: #959191;
+               font-size: 1.2rem;
+               margin-right: 15px;
+           }
+           ion-input {
+               --color: #3a3939;
+               font-weight: 500;
+           }
+       }
+
+       .forget-password {
+           color: #fff;
+           margin-top: 10px;
+           text-align: center;
+
+           h3 {
+               font-size: 1rem;
+               font-weight: 400;
+           }
+       }
+   }
+
+   .login-button {
+       width: 50vw;
+       --color: #fff;
+       background: linear-gradient(to right, #56ab2f, #a8e063);
+       margin-top: 60px;
+       padding: 10px;
+       border-top-right-radius: 30px;
+       border-bottom-right-radius: 30px;
+       font-size: 1.9rem;
+       font-weight: 700;
+       display: flex;
+       justify-content: flex-end;
+       ion-icon {
+           margin-left: 10px;
+       }
+       ion-button {
+           --color: #ffffff;
+       }
+   }
+
+   .footer {
+       color: #fff;
+       padding: 0 12vw;
+       margin-top: 90px;
+       text-align: center;
+       margin-bottom: 20px;
+
+       h3 {
+           font-size: 1rem;
+           font-weight: 400;
+
+           span {
+               font-size: 1.2rem;
+               color:#a8e063;
+               font-weight: 500;
+           }
+       }
+   }
+}
+
+//modal
+ion-modal {
+   --height: 50%;
+   --border-radius: 16px;
+   --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+   --background: rgb(255, 255, 255);
+ }
+
+ ion-modal::part(backdrop) {
+   background: rgba(209, 213, 219);
+   opacity: 1;
+ }
+
+ ion-modal ion-toolbar {
+   --background:  #5271ff;
+   --color: white;
+ }

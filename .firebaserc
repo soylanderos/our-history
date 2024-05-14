@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "our-history-249a0": {
+      "hosting": {
+        "app": [
+          "our-history-249a0"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "our-history-249a0"
+  }
+}

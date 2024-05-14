@@ -1,0 +1,36 @@
+<ion-content class="content">
+  <div class="header">
+    <h3>Welcome to</h3>
+    <h1>Our History</h1>
+  </div>
+
+
+  <form [formGroup]="loginForm" novalidate (ngSubmit)="login()">
+    <div class="login-form">
+      <ion-item>
+        <ion-icon name="person-outline"></ion-icon>
+        <ion-input type="email" placeholder="Username" formControlName="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="lock-closed-outline"></ion-icon>
+        <ion-input type="{{ inputType }}" placeholder="Password" formControlName="password"></ion-input>
+        <ion-icon *ngIf="loginForm.get('password') && loginForm.get('password')?.value"  name="{{ iconType }}" (click)="togglePassword()" slot="end"></ion-icon>
+      </ion-item>
+
+
+    </div>
+
+    <div class="login-button">
+      <ion-button fill="clear" type="submit">
+      Login <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </form>
+  <div class="footer">
+    <h3>Don't have an account <span id="open-modal">Register now</span></h3>
+  </div>
+
+
+
+</ion-content>

@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Agregar Fotos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card class="form-card">
+    <ion-card-header>
+      <ion-card-title class="form-title">Carga de Fotos</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item lines="none">
+        <ion-icon name="image" slot="start" class="form-icon"></ion-icon>
+        <ion-label position="stacked" class="form-label">Selecciona una Foto</ion-label>
+        <img *ngIf="image" [src]="image"/>
+        <ion-button expand="block" (click)="takePictureAndUpload()">
+          Tomar una Foto
+        </ion-button>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon name="create" slot="start" class="form-icon"></ion-icon>
+        <ion-label position="stacked" class="form-label">Descripción (opcional)</ion-label>
+        <ion-textarea rows="3" class="form-input" [(ngModel)]="descripcion"></ion-textarea>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon name="calendar" slot="start" class="form-icon"></ion-icon>
+        <ion-label position="stacked" class="form-label">Fecha y Hora del Momento</ion-label>
+        <ion-datetime display-format="DD/MM/YYYY HH:mm" [(ngModel)]="fechaHora" class="form-input"></ion-datetime>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon name="location" slot="start" class="form-icon"></ion-icon>
+        <ion-label position="stacked" class="form-label">Ubicación (opcional)</ion-label>
+        <ion-input type="text" class="form-input" [(ngModel)]="ubicacion"></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" color="primary" class="form-button" (click)="takePictureAndUpload()">
+    <ion-icon name="add-circle" slot="start"></ion-icon>
+    Agregar Momento
+  </ion-button>
+</ion-content>
