@@ -2,7 +2,7 @@ import { FeedbackService } from '../../services/feedback/feedback.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
-import { LoadingController } from '@ionic/angular';
+
 
 
 @Component({
@@ -23,7 +23,6 @@ export class LoginPage implements OnInit {
     private fb: FormBuilder,
     private afAuth: AuthService,
     private FbService: FeedbackService,
-    public loadingController: LoadingController
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -61,10 +60,7 @@ export class LoginPage implements OnInit {
   }
 
   async loadingLogin() {
-    this.loading = await this.loadingController.create({
-      message: 'Iniciando sesión...'
-    });
-    await this.loading.present();
+    this.loading = await this.FbService.showLoading('Iniciando sesión...');
   }
 
 }
