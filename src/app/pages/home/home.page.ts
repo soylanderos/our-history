@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
 
-  constructor() { }
+  moments: any[] = [];
 
-  ngOnInit() {
+  constructor(
+    private firestoreService: FirestoreService
+  ) { }
+
+  async ngOnInit() {
+    await this.getMoments();
+  }
+
+  getMoments() {
+    this.firestoreService.getAllMoments().subscribe((moments) => {
+      this.moments = moments;
+    });
   }
 
 }

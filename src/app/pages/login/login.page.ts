@@ -42,25 +42,23 @@ export class LoginPage implements OnInit {
 
   async login() {
     if(this.loginForm.invalid){
-      this.FbService.showToast('Ingrese su usuario y contraseña');
+      this.FbService.showToast('Enter your username and password');
       return;
     }
     const email = this.loginForm.value.email;
     const password = this.loginForm.value.password;
     if(this.loginForm.valid){
-      this.loadingLogin();
+      this.FbService.showLoading('Logging in...');
       await this.afAuth.login(email, password)
       .then(() => {
         this.loading.dismiss();
+        this.FbService.dismissLoading();
       })
       .catch(() => {
         this.loading.dismiss();
+        this.FbService.dismissLoading();
       })
     }
-  }
-
-  async loadingLogin() {
-    this.loading = await this.FbService.showLoading('Iniciando sesión...');
   }
 
 }

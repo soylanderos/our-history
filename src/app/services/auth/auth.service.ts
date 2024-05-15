@@ -25,18 +25,18 @@ export class AuthService {
       await signInWithEmailAndPassword(this.afAuth, email, password)
       .then(() => {
         // El usuario ha iniciado sesión correctamente
-        this.FbService.showToast('Inicio de sesión exitoso');
+        this.FbService.showToast('Successful login');
         this.router.navigate(['/tabs/home']);
       })
       .catch(error => {
         if (error.code === 'auth/wrong-password') {
-          this.FbService.showToast('Contraseña incorrecta');
+          this.FbService.showToast('Incorrect password');
         }
         else if(error.code === 'auth/user-not-found'){
-          this.FbService.showToast('Usuario no registrado');
+          this.FbService.showToast('Unregistered user');
         }
         else {
-          this.FbService.showToast('Error al iniciar sesión');
+          this.FbService.showToast('Failed to login');
         }
       });
     }

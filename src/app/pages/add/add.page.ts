@@ -4,6 +4,8 @@ import { StorageService } from 'src/app/services/storage/storage.service';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Capacitor } from '@capacitor/core';
 import { FeedbackService } from 'src/app/services/feedback/feedback.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-add',
@@ -15,7 +17,7 @@ export class AddPage  {
   image: any;
   selectedCategory: string = '';
   descripcion: string = '';
-  fechaHora: any;
+  fechaHora: string = '2022-04-21T00:00:00';
   ubicacion: string = '';
   momentCategories: string[] = [
     'Trips together',
@@ -33,7 +35,8 @@ export class AddPage  {
   constructor(
     private firestore: Firestore,
     private storageService: StorageService,
-    private feedbackService: FeedbackService
+    private feedbackService: FeedbackService,
+    private router: Router
   ) {}
 
   async takePicture() {
@@ -70,6 +73,7 @@ export class AddPage  {
       console.log(response);
       this.feedbackService.dismissLoading();
       this.feedbackService.showToast('Your moment has been successfully added.');
+      this.router.navigate(['/tabs/home']);
       //clean inputs
       this.resetForm();
     } catch(e) {
@@ -93,8 +97,12 @@ export class AddPage  {
   }
 
   getCurrentDate() {
-   this.fechaHora = new Date().toISOString();
+    const currentDate = new Date();
+    const utcOffset = currentDate.getTimezoneOffset() * 60000; // Offset en milisegundos
+    const utcDate = new Date(currentDate.getTime() - utcOffset); // Convertir a UTC
+    this.fechaHora = utcDate.toISOString();
   }
+
 
   openCalendar() {
     console.log('Abrir calendario');
