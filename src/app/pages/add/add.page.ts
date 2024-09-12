@@ -19,6 +19,7 @@ export class AddPage  {
   descripcion: string = '';
   fechaHora: string = '2022-04-21T00:00:00';
   ubicacion: string = '';
+  title: string = '';
   momentCategories: string[] = [
     'Trips together',
     'Special dates',
@@ -68,7 +69,8 @@ export class AddPage  {
         selectedCategory: this.selectedCategory,
         descripcion: this.descripcion,
         fechaHora: this.fechaHora,
-        ubicacion: this.ubicacion
+        ubicacion: this.ubicacion,
+        title: this.title
       });
       console.log(response);
       this.feedbackService.dismissLoading();

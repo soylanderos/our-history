@@ -5,23 +5,37 @@
 
 
   .header {
-       padding: 10vw;
-       margin-top: 7em;
-       color: #fff;
+    margin-top: 50px;
+    padding: 10vw;
+    color: #fff;
+    text-align: center;
 
-       h3 {
-           font-size: 3.5rem;
-           color: #9d9bef;
-           font-weight: 400;
-           span {
-               color: #fff;
-           }
-       }
-       h1 {
-           font-size: 3.2rem;
-           font-weight: 600;
-       }
-   }
+    .header-icon {
+      font-size: 3rem;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      font-size: 2rem;
+      color: #9d9bef;
+      font-weight: 400;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 600;
+      margin: 10px 0;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: #e0e0e0;
+      margin-top: 10px;
+    }
+  }
 
    .login-form {
        padding: 0 12vw;
@@ -77,12 +91,30 @@
        }
    }
 
+   .footer-inputs {
+    color: #fff;
+       padding: 0 12vw;
+       text-align: center;
+       margin-bottom: 10px;
+
+       h3 {
+           font-size: 1rem;
+           font-weight: 400;
+
+           span {
+               font-size: 1.2rem;
+               color:#a8e063;
+               font-weight: 500;
+           }
+       }
+   }
+
    .footer {
        color: #fff;
        padding: 0 12vw;
-       margin-top: 90px;
+       margin-top: 20px;
        text-align: center;
-       margin-bottom: 20px;
+       margin-bottom: 10px;
 
        h3 {
            font-size: 1rem;
@@ -96,21 +128,3 @@
        }
    }
 }
-
-//modal
-ion-modal {
-   --height: 50%;
-   --border-radius: 16px;
-   --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-   --background: rgb(255, 255, 255);
- }
-
- ion-modal::part(backdrop) {
-   background: rgba(209, 213, 219);
-   opacity: 1;
- }
-
- ion-modal ion-toolbar {
-   --background:  #5271ff;
-   --color: white;
- }

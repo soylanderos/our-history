@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon color="light" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ moment.title }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon color="light" name="ellipsis-horizontal-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <div class="image-container">
+    <img (click)="toggleText()" [src]="moment.imageUrl" class="background-image">
+    <div class="overlay" [class.hidden]="!showText">
+      <ion-card>
+        <ion-card-content >
+          <h6 class="ubicacion"><ion-icon name="location" slot="start" class="form-icon"></ion-icon> {{ moment.ubicacion }}</h6>
+          <p class="date" >{{ moment.fechaHora | date:'medium' }}</p>
+          <h2 class="descripcion">{{ moment.descripcion }}</h2>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

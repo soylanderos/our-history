@@ -1,13 +1,50 @@
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">account</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Detalles del Usuario
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
 
-  <ion-item (click)="logout()">
-    <ion-icon name="log-out"></ion-icon>
-    <ion-label>Cerrar Sesion</ion-label>
-  </ion-item>
+<ion-content>
+<main class="profile" *ngIf="user">
+  <div class="profile-bg"></div>
+  <img [src]="user.avatarUrl" alt="User Avatar">
+  <section class="container">
+    <aside class="profile-image">
+      <a class="camera" href="#">
+                    <i class="fas fa-camera"></i>
+                </a>
+    </aside>
+    <section class="profile-info">
+      <h1 class="first-name">{{ user.firstName }}</h1>
+      <h1 class="second-name">{{ user.lastName }}</h1>
+      <h2>{{ user.email }}</h2>
+      <ion-item lines="none" (click)="logout()">
+        <ion-icon name="log-out" slot="start"></ion-icon>
+        <ion-label>Cerrar Sesión</ion-label>
+      </ion-item>
+
+    </section>
+  </section>
+</main>
+<div class="account-container" *ngIf="!user">
+  <p>No user data found.</p>
+</div>
+
+
+
+
+<!--   
+    <div class="account-container" *ngIf="user">
+      <img [src]="user.avatarUrl" alt="User Avatar">
+      <h1>{{ user.firstName }} {{ user.lastName }}</h1>
+      <p>{{ user.email }}</p>
+    </div>
+    
   
+  
+ 
+      Puedes agregar más campos aquí según sea necesario
+       -->
 </ion-content>

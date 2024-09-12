@@ -2,7 +2,7 @@ import { FeedbackService } from '../../services/feedback/feedback.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
-
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,12 +17,14 @@ export class LoginPage implements OnInit {
   inputType: string = 'password';
   iconType: string = 'eye-off';
   loading: any;
+  heartIcon: string = 'heart-outline'; // Initial icon
 
 
   constructor(
     private fb: FormBuilder,
     private afAuth: AuthService,
     private FbService: FeedbackService,
+    private router: Router
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -32,6 +34,14 @@ export class LoginPage implements OnInit {
 
   async ngOnInit() {
     await console.log('LoginPage');
+  }
+
+  toggleHeartIcon() {
+    this.heartIcon = this.heartIcon === 'heart-outline' ? 'heart-sharp' : 'heart-outline';
+  }
+  
+  navigateToRegister() {
+    this.router.navigate(['/register']);
   }
 
   //Functions
@@ -48,17 +58,12 @@ export class LoginPage implements OnInit {
     const email = this.loginForm.value.email;
     const password = this.loginForm.value.password;
     if(this.loginForm.valid){
-      this.FbService.showLoading('Logging in...');
       await this.afAuth.login(email, password)
-      .then(() => {
-        this.loading.dismiss();
-        this.FbService.dismissLoading();
-      })
-      .catch(() => {
-        this.loading.dismiss();
-        this.FbService.dismissLoading();
-      })
     }
+  }
+
+  navigateToForgotPassword(){
+    this.router.navigate(['/forgot-password']);
   }
 
 }
